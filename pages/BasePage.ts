@@ -21,8 +21,12 @@ export class BasePage {
    }
 
    public async navigateToSignIn() {
-      await this.page.goto(`https://accounts.google.com/signin`)
+      await this.page.goto(`https://accounts.google.com/`)
    }
+
+   // public async navigateToSignIn() {
+   //    await this.page.goto(`https://accounts.google.com/signin`)
+   // }
 
    public async getText(locator: Locator): Promise<string> {
       return (await locator.textContent()) || ''

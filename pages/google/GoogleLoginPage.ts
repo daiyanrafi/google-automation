@@ -9,9 +9,13 @@ export class GoogleLoginPage extends BasePage {
   private nextButton: Locator
   private profileIcon: Locator
   private couldNotFind: Locator;  
+  private signInButton: Locator;  
+  private emailSelect: Locator;  
 
   constructor(page: Page) {
     super(page)
+    this.signInButton = page.getByLabel('Sign in')
+    this.emailSelect = page.locator('.LbOduc').first()
     this.emailInput = page.locator('input[type="email"]')
     this.passwordInput = page.locator('input[type="password"]')
     this.nextButton = page.locator('#identifierNext')
@@ -19,8 +23,13 @@ export class GoogleLoginPage extends BasePage {
     this.couldNotFind = page.getByText('Couldn’t find your Google');
   }
 
+  // await page.locator('.LbOduc').first().click();
+
   async login(email: string, password: string) {
-    await this.fillInput(this.emailInput, email)
+
+    await this.clickButton(this.emailSelect)
+    // await this.clickButton(this.signInButton)
+    // await this.fillInput(this.emailInput, email)
     await this.clickButton(this.nextButton)
     await this.page.waitForTimeout(2000) 
     await this.fillInput(this.passwordInput, password)
